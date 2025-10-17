@@ -1,6 +1,12 @@
 "use client"
 
+import {register} from "@/actions/create-account-action"
+import { useActionState } from "react";
+import { useFormState } from "react-dom";
+
 export default function RegisterForm() {
+  const [state, dispatch] = useFormState(register, null)
+
   return (
     <form className="mt-14 space-y-5" noValidate>
       <div className="flex flex-col gap-2">

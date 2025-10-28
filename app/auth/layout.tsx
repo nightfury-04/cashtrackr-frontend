@@ -1,4 +1,5 @@
 import Logo from "@/components/ui/Logo";
+import ToastNotification from "@/components/ui/ToastNotification";
 
 export default function RootLayout({
   children,
@@ -18,6 +19,8 @@ export default function RootLayout({
           <div className="max-w-3xl mx-auto">{children}</div>
         </div>
       </div>
+
+      <ToastNotification />
     </>
   );
 }

@@ -25,11 +25,19 @@ export const LoginSchema = z.object({
   password: z.string().min(1, { message: "El Password no puede ir vacio" }),
 });
 
+export const TokenSchema = z
+  .string({ message: "Token no válido" })
+  .length(6, { message: "Token no válido" });
+
 export const SuccessSchema = z.string();
 export const ErrorResponseSchema = z.object({
   error: z.string(),
 });
 
-export const TokenSchema = z
-  .string({ message: "Token no válido" })
-  .length(6, { message: "Token no válido" });
+export const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  email: z.string().email(),
+});
+
+export type User = z.infer<typeof UserSchema>;

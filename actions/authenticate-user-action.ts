@@ -1,13 +1,17 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { ErrorResponseSchema, LoginSchema } from "@/src/schemas";
 
 type ActionStateType = {
   errors: string[];
 };
 
-export async function authenticate(prevState: any, formData: FormData) {
+export async function authenticate(
+  prevState: ActionStateType,
+  formData: FormData
+) {
   const loginCredentials = {
     email: formData.get("email"),
     password: formData.get("password"),
@@ -49,7 +53,5 @@ export async function authenticate(prevState: any, formData: FormData) {
     path: "/",
   });
 
-  return {
-    errors: [],
-  };
+  redirect("/admin");
 }

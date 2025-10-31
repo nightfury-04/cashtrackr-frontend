@@ -5,7 +5,6 @@ import {
   ForgotPasswordSchema,
   SuccessSchema,
 } from "@/src/schemas";
-import { email, success } from "zod";
 
 type ActionStateType = {
   errors: string[];

@@ -1,5 +1,6 @@
 "use server";
 
+import getToken from "@/src/auth/token";
 import { DraftBudgetSchema, SuccessSchema } from "@/src/schemas";
 import { cookies } from "next/headers";
 
@@ -23,13 +24,14 @@ export async function createBudget(
     };
   }
 
-  const token = cookies().get("CASHTRACKR_TOKEN")?.value;
+  const token = getToken();
   const url = `${process.env.API_URL}/budgets`;
 
   const req = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
     },
     body: JSON.stringify({
       name: budget.data.name,
@@ -38,8 +40,9 @@ export async function createBudget(
   });
 
   const json = await req.json();
+  console.log("JSON", json);
 
-  const success = SuccessSchema.parse(json)
+  const success = SuccessSchema.parse(json);
 
   return {
     errors: [],

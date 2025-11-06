@@ -40,7 +40,7 @@ export async function createBudget(
   });
 
   const json = await req.json();
-  console.log("JSON", json);
+  // console.log("JSON", json);
 
   const success = SuccessSchema.parse(json);
 

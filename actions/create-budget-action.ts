@@ -2,6 +2,7 @@
 
 import getToken from "@/src/auth/token";
 import { DraftBudgetSchema, SuccessSchema } from "@/src/schemas";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 type ActionStateType = {
@@ -31,7 +32,7 @@ export async function createBudget(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name: budget.data.name,
@@ -40,7 +41,8 @@ export async function createBudget(
   });
 
   const json = await req.json();
-  // console.log("JSON", json);
+
+  revalidatePath("/admin");
 
   const success = SuccessSchema.parse(json);
 

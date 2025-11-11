@@ -8,7 +8,7 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Expense } from "@/src/schemas";
 
 export default function ExpenseMenu({

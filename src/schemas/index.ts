@@ -61,7 +61,7 @@ export const PasswordValidationSchema = z
   .string()
   .min(1, { message: "Password no válido" });
 
-export const DrafExpenseSchema = z.object({
+export const DraftExpenseSchema = z.object({
   name: z.string().min(1, { message: "El nomnbre del gasto es obligatorio" }),
   amount: z.coerce.number().min(1, { message: "Cantidad no válida" }),
 });
@@ -102,4 +102,5 @@ export const BudgetsAPIResponseSchema = z.array(
 
 export type User = z.infer<typeof UserSchema>;
 export type Budget = z.infer<typeof BudgetAPIResponseSchema>;
+export type DraftExpense = z.infer<typeof DraftExpenseSchema>
 export type Expense = z.infer<typeof ExpenseAPIResponseSchema>;

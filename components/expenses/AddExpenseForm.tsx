@@ -44,6 +44,7 @@ export default function AddExpenseForm({
       <form
         className="bg-gray-100 shadow-lg rounded-lg p-10 mt-10 border"
         noValidate
+        action={dispatch}
       >
         <ExpenseForm />
         <input

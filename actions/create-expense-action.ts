@@ -6,7 +6,7 @@ import {
   ErrorResponseSchema,
   SuccessSchema,
 } from "@/src/schemas";
-import { success } from "zod";
+import { revalidatePath } from "next/cache";
 
 type ActionStateType = {
   errors: string[];
@@ -46,7 +46,7 @@ export default async function createExpense(
     }),
   });
 
-  const json = await req.json;
+  const json = await req.json();
 
   if (!req.ok) {
     const { error } = ErrorResponseSchema.parse(json);
@@ -57,6 +57,7 @@ export default async function createExpense(
   }
 
   const success = SuccessSchema.parse(json);
+  revalidatePath(`/admin/budgets/${budgetId}`);
 
   return {
     errors: [],

@@ -2,7 +2,7 @@
 
 import getToken from "@/src/auth/token";
 import {
-  DrafExpenseSchema,
+  DraftExpenseSchema,
   ErrorResponseSchema,
   SuccessSchema,
 } from "@/src/schemas";
@@ -23,7 +23,7 @@ export default async function createExpense(
     amount: formData.get("amount"),
   };
 
-  const expense = DrafExpenseSchema.safeParse(expenseData);
+  const expense = DraftExpenseSchema.safeParse(expenseData);
   if (!expense.success) {
     return {
       errors: expense.error.issues.map((issue) => issue.message),

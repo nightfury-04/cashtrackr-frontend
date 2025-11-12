@@ -27,11 +27,12 @@ export default function ModalContainer() {
 
   const addExpense = searchParams.get("addExpense");
   const editExpense = searchParams.get("editExpenseId");
-
+  const deleteExpense = searchParams.get("deleteExpenseId");
 
   const getComponentName = () => {
     if (addExpense) return "AddExpense";
     if (editExpense) return "EditExpense";
+    if (deleteExpense) return "DeleteExpense";
   };
 
   const componentName = getComponentName();
@@ -73,7 +74,9 @@ export default function ModalContainer() {
                 leaveTo="opacity-0 scale-95"
               >
                 <DialogPanel className="w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
-                  {ComponentToRender ? <ComponentToRender closeModal={closeModal} /> : null}
+                  {ComponentToRender ? (
+                    <ComponentToRender closeModal={closeModal} />
+                  ) : null}
                 </DialogPanel>
               </TransitionChild>
             </div>

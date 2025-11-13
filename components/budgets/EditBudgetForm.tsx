@@ -4,7 +4,6 @@ import { Budget } from "@/src/schemas";
 import BudgetForm from "./BudgetForm";
 import { useFormState } from "react-dom";
 import { editBudget } from "@/actions/edit-budget-action";
-import { success } from "zod";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -23,7 +22,7 @@ export default function EditBudgetForm({ budget }: { budget: Budget }) {
       toast.success(state.success);
       router.push("/admin");
     }
-  }, []);
+  }, [state, router]);
 
   return (
     <>

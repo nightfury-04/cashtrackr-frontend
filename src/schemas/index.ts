@@ -62,9 +62,32 @@ export const PasswordValidationSchema = z
   .min(1, { message: "Password no válido" });
 
 export const DraftExpenseSchema = z.object({
-  name: z.string().min(1, { message: "El nomnbre del gasto es obligatorio" }),
+  name: z.string().min(1, { message: "El nombre del gasto es obligatorio" }),
   amount: z.coerce.number().min(1, { message: "Cantidad no válida" }),
 });
+
+export const UpdateProfileSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: "El email es obligatorio" })
+    .email({ message: "Email no válido" }),
+  name: z.string().min(1, { message: "Tu nombre no puede ir vacío" }),
+});
+
+export const UpdatePasswordSchema = z
+  .object({
+    current_password: z
+      .string()
+      .min(1, { message: "El Password no puede ir vacio" }),
+    password: z.string().min(8, {
+      message: "El Nuevo Password debe ser de al menos 8 caracteres",
+    }),
+    password_confirmation: z.string(),
+  })
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Los Passwords no son iguales",
+    path: ["password_confirmation"],
+  });
 
 export const SuccessSchema = z.string();
 export const ErrorResponseSchema = z.object({
@@ -102,5 +125,5 @@ export const BudgetsAPIResponseSchema = z.array(
 
 export type User = z.infer<typeof UserSchema>;
 export type Budget = z.infer<typeof BudgetAPIResponseSchema>;
-export type DraftExpense = z.infer<typeof DraftExpenseSchema>
+export type DraftExpense = z.infer<typeof DraftExpenseSchema>;
 export type Expense = z.infer<typeof ExpenseAPIResponseSchema>;

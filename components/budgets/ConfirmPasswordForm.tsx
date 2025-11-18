@@ -12,6 +12,12 @@ export default function ConfirmPasswordForm() {
   const searchParams = useSearchParams();
   const budgetId = +searchParams.get("deleteBudgetId")!;
 
+  const closeModal = () => {
+    const hideModal = new URLSearchParams(searchParams.toString());
+    hideModal.delete("deleteBudgetId");
+    router.replace(`${pathname}?${hideModal}`);
+  };
+
   const deleteBudgetWithPassword = deleteBudget.bind(null, budgetId);
   const [state, dispatch] = useFormState(deleteBudgetWithPassword, {
     errors: [],
@@ -23,13 +29,7 @@ export default function ConfirmPasswordForm() {
       toast.success(state.success);
       closeModal();
     }
-  }, [state]);
-
-  const closeModal = () => {
-    const hideModal = new URLSearchParams(searchParams.toString());
-    hideModal.delete("deleteBudgetId");
-    router.replace(`${pathname}?${hideModal}`);
-  };
+  }, [state, closeModal]);
 
   return (
     <>

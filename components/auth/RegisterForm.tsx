@@ -22,7 +22,7 @@ export default function RegisterForm() {
   return (
     <form ref={ref} className="mt-14 space-y-5" noValidate action={dispatch}>
       {state.errors.map((error) => (
-        <ErrorMessage>{error}</ErrorMessage>
+        <ErrorMessage key={error}>{error}</ErrorMessage>
       ))}
 
       {state.success && <SuccessMessage>{state.success}</SuccessMessage>}

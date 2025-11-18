@@ -4,7 +4,6 @@ import getToken from "@/src/auth/token";
 import { BudgetsAPIResponseSchema } from "@/src/schemas";
 import { formatCurrency, formatDate } from "@/src/utils";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
 import Link from "next/link";
 
 export const metadata: Metadata = {
